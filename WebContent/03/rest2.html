@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> test </title>
+		
+		 <link rel="stylesheet" href="../css/common.css" />
+		<script type="text/javascript" src="../js/lwquery.js"></script>
+		<script type="text/javascript" src="../js/jquery.js" ></script>
+		
+	</head>
+	<body>
+		<div class='container'>
+			
+			<div style='background-color: #F8F8FF; padding:4px'>
+				<a href='index.html'> 首页 </a> >> 列表
+			</div>
+			
+			<div class='row'>
+				<button onclick='M.test()'> 测试 </button>
+			</div>
+			
+			<div class='row student-list'>
+				<table style='width:100%'>
+					<thead>
+						<tr>
+						<th> 学号 </th>
+						<th> 姓名 </th>
+						<th> 性别</th>
+						<th> 手机号 </th>
+						</tr>
+					</thead>
+					<tbody>						
+					</tbody>
+				</table>				
+			</div>
+		</div>
+	</body>
+	
+	<script>
+		var M = {};
+		
+		M.test = function()
+		{
+			var req = {};
+			req.id = -20200001;
+			
+			// 带4个参数: uri, req, okHandler, errHandler
+			LW.rest('Test', req, function(data){				
+				console.log ( data ); // data
+			}, 
+			function(error, reason){
+				alert( reason);
+			})
+		}
+		
+		/* 列表查询 */
+		M.listStudent = function(){
+			var req = {};
+			LW.rest("StudentList", req, function(data){
+				M.addStudentList(data);
+			})			
+		}
+		
+		/* 添加学生记录到表格 */
+		M.addStudentList = function(data){
+			var target = $('.student-list tbody');  // <tbody>
+			target.html(''); // 清空
+			
+			for(var i=0; i<data.length; i++)
+			{
+				var it = data[i];
+				var str = "<tr>"
+					+ "<td>" + it.id + "</td>"
+					+ "<td>" + it.name + "</td>"
+					+ "<td>" + ( it.sex ? '男' : '女') + "</td>"
+					+ "<td>" + it.phone + "</td>"
+					+ "</tr>";
+					
+				target.append ( str );
+			}
+		}
+		
+		// 初始加载
+		M.listStudent();
+		
+	</script>
+</html>

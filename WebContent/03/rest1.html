@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> test </title>
+		
+		 <link rel="stylesheet" href="../css/common.css" />
+		<script type="text/javascript" src="../js/lwquery.js"></script>
+		<script type="text/javascript" src="../js/jquery.js" ></script>
+		
+	</head>
+	<body>
+		<div class='container'>
+			
+			<div>
+				<button onclick='M.test()'> 测试 </button>
+			</div>
+		</div>
+	</body>
+	
+	<script>
+		var M = {};
+		
+		M.test = function()
+		{
+			var req = {};
+			req.id = 20190001;
+			
+			// 带4个参数: uri, req, okHandler, errHandler
+			LW.rest('Test', req, function(data){				
+				console.log ( data ); // data
+			}, 
+			function(error, reason){
+				alert( reason);
+			})
+		}
+		
+	</script>
+</html>

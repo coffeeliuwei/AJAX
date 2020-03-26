@@ -1,0 +1,9 @@
+{
+  "name":"liuwei",
+  "skills":[
+  {"id":1,"skills":"Eclipse","name":"java"},
+  {"id":2,"skills":"VS","name":"C++"},
+  {"id":3,"skills":"VS","name":"Phyon"},
+  ],
+  "pop":true
+}

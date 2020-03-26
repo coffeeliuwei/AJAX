@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>test3.html</title>
+	
+    <meta charset='UTF-8'>
+   <link rel="stylesheet" href="../css/common.css" />
+		<script type="text/javascript" src="../js/lwquery.js"></script>
+		<script type="text/javascript" src="../js/jquery.js" ></script>
+	
+    <style>
+    	.main
+    	{
+    		width: 360px;
+    		margin: 10px auto;    		
+    	}
+    	.main input,select{
+    		width: 250px;
+    		padding: 4px;
+    		margin: 2px;
+    	}
+    </style>
+
+  </head>
+  
+  <body>
+  	<div class='main'>
+  	
+	  	<div class='info'> 
+	  		
+	    	学号: <input type='text' class='id' />  <br>  <!-- name: 即参数名 -->
+	    	姓名: <input type='text' class='name' /> <br>
+	    	手机: <input type='text' class='phone' /> <br>
+	    	性别: <select class='sex' >
+	    		<option value='male'> 男 </option>
+	    		<option value='female'> 女 </option>
+	    	</select> <br>
+	    	<button onclick='doSubmit()'> 提交 </button> 	    
+	    </div>
+	    
+    </div>
+  </body>
+  
+  <script>
+	function doSubmit()
+	{
+		// 请求参数
+		var f = $('.info');
+		var req = {};
+		req.id = $('.id', f).val().trim();  // 在父容器f下找子控件 .id, 相当于 $('.info .id')
+		req.name = $('.name', f).val().trim();
+		req.phone = $('.phone', f).val().trim();
+		req.sex = $('.sex', f).val().trim();
+		
+		$.ajax({
+			type:'POST',       /* 请求类型 GET / POST */ 
+			url:LW.getContextPath()+'AddStudent',   /* 服务URI, 用相对地址 */		
+			data: req,        /* 附加请求参数 */
+			dataType: 'json', /* 期望服务器返回的数据类型 */
+			success: function(resp){  /* 已经将服务器返回的数据转成 JS对象 */
+				console.log(resp);
+				if(resp.error == 0) 
+					alert('成功');
+				else
+					alert('出错:' + resp.reason);
+			},
+			error: function(jqXHR, textStatus, errorThrown)
+			{
+				alert("错误:" + jqXHR.status);
+			}
+		});
+	}
+  </script>
+</html>

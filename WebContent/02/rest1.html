@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>test</title>
+	
+    <meta charset='UTF-8'>
+	<link rel="stylesheet" href="../css/common.css" />
+		<script type="text/javascript" src="../js/lwquery.js"></script>
+		<script type="text/javascript" src="../js/jquery.js" ></script>
+	
+    <style>
+    	.main
+    	{
+    		width: 360px;
+    		margin: 10px auto;    		
+    	}
+    	.main input,select{
+    		width: 250px;
+    		padding: 4px;
+    		margin: 2px;
+    	}
+    </style>
+
+  </head>
+  
+  <body>
+  	<div class='main'>
+  	
+	  	<div class='info'> 
+	  		
+	    	学号: <input type='text' class='id' />  <br>  <!-- name: 即参数名 -->
+	    	姓名: <input type='text' class='name' /> <br>
+	    	手机: <input type='text' class='phone' /> <br>
+	    	性别: <select class='sex' >
+	    		<option value='male'> 男 </option>
+	    		<option value='female'> 女 </option>
+	    	</select> <br>
+	    	<button onclick='doSubmit()'> 提交 </button> 	    
+	    </div>
+	    
+    </div>
+  </body>
+  
+  <script>
+	function doSubmit()
+	{
+		// 请求参数
+		var f = $('.info');
+		var req = {};
+		req.id = $('.id', f).val().trim();  // 在父元素 f 下面，寻找子元素 .id ，相当于 $('.info .id')
+		req.name = $('.name', f).val().trim();
+		req.phone = $('.phone', f).val().trim();
+		req.sex = $('.sex', f).val().trim();
+		
+		// 转成 JSON 字符串
+		var jsonstr = JSON.stringify(req);
+		
+		$.ajax({
+			type:'POST',       
+			url:LW.getContextPath()+'AddStudent',   	
+			data: jsonstr,    /*  JSON字符串*/
+			dataType: 'json', /* 睁大眼睛看这行! 作用是让jQuery把返回的应答自动转成Object! */
+			success: function(resp){  
+				console.log(resp); /* resp应已经转成了Object! 是jQuery内部调用 JSON.parse(str)作了转换 */
+				if(resp.error == 0) 
+					alert('成功');
+				else
+					alert('出错:' + resp.reason);
+			},
+			error: function(jqXHR, textStatus, errorThrown)
+			{
+				alert("错误:" + jqXHR.status);
+			}
+		});
+	}
+  </script>
+</html>

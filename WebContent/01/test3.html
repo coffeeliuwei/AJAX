@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<link rel="stylesheet" href="../css/common.css" />
+		<script type="text/javascript" src="../js/lwquery.js"></script>
+		<script type="text/javascript" src="../js/jquery.js" ></script>
+		
+		<style>
+			body{
+				background-color: #eee;
+			}
+			.main{
+				width: 800px;
+				margin: 20px auto;
+				background-color: #fff;
+				min-height: 400px;
+				padding: 10px;
+			}
+			/* 工具按钮区 */
+			.main .toolbar
+			{
+				margin:  10px 0px;
+			}
+			
+			/* 数据区 */
+			.main .content{
+				width: 400px;
+			}
+			/* 无数据时的提示 */
+			.main .content .empty{
+				text-align: center;
+				padding: 4px;
+				display: block;
+				border: 0px solid #888;
+				border-width: 0px 1px 1px 1px;				
+			}
+			/* 列宽设定 */
+			.main .table .c1{ width: 80px; }
+			.main .table .c2{ width: 120px; }
+			.main .table .c3{ width: 40px; }
+			.main .table .c4{ width: 160px; }
+			
+		</style>
+	</head>
+	<body>
+		<div class='main'>
+			<div class='toolbar'>
+				<!-- 查询条件输入 -->
+				<input type='text' class='from' placeholder="开始学号"  />
+				-
+				<input type='text' class='to' placeholder="结束学号"  />
+				
+				<button onclick='query()'> 查询 </button>
+			</div>
+			
+			<div class='content'>
+				<table class='table'>
+					<thead>
+						<th class='c1'> 学号 </th>
+						<th class='c2'> 姓名 </th>
+						<th class='c3'> 性别 </th>
+						<th class='c4'> 手机号 </th>
+					</thead>
+					<tbody>
+						
+					</tbody>
+				</table>
+				<!-- 无数据时才显示这个提示 -->
+				<div class='empty'>
+					没有数据
+				</div>
+			
+			</div>
+			
+		</div>
+	</body>
+	
+	<script>
+		function query()
+		{
+			// 请求参数
+			var req = {};
+			req.from = $('.toolbar .from').val().trim();
+			req.to = $('.toolbar .to').val().trim();
+			
+			$.ajax({
+				type:'GET',       /* 请求类型 GET / POST */ 
+				url:LW.getContextPath()+'QueryById',   /* 服务URI, 用相对地址 */		
+				data: req,        /* 附加请求参数 */
+				dataType: 'json', /* 期望服务器返回的数据类型 */
+				success: function(resp){  /* 已经将服务器返回的数据转成 JS对象 */
+					//console.log(resp);
+					showResult(resp);
+				}
+			});
+		}
+		
+		// 格式化数据并显示
+		function showResult(result)
+		{
+			var target = $(".main .content tbody");
+			target.html(""); // 清空
+			for(var row of result)
+			{
+				var str = "<tr>"
+					+ "<td>" + row.id + "</td>"
+					+ "<td>" + row.name + "</td>"
+					+ "<td>" + ( row.sex?'男':'女') + "</td>"
+					+ "<td>" + row.phone + "</td>"
+					+ "</tr>"
+					;
+				target.append( str );
+			}
+			
+			// 如果没有数据，则把下面的提示显示出来
+			if(result.length > 0) 
+				$(".main .content .empty").hide();
+			else 
+				$(".main .content .empty").show();
+		}
+		
+	</script>
+</html>

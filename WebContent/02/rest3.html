@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>test</title>
+	
+    <meta charset='UTF-8'>
+    <link rel="stylesheet" href="../css/common.css" />
+		<script type="text/javascript" src="../js/lwquery.js"></script>
+		<script type="text/javascript" src="../js/jquery.js" ></script>
+    <style>
+    	.main
+    	{
+    		width: 360px;
+    		margin: 10px auto;    		
+    	}
+    	.main input,select{
+    		width: 250px;
+    		padding: 4px;
+    		margin: 2px;
+    	}
+    </style>
+
+  </head>
+  
+  <body>
+  	<div class='main'>
+  	
+	  	<div class='info'> 
+	  		
+	    	用户名: <br> <input type='text' class='name' />  <br>  
+	    	密码: <br> <input type='text' class='password' /> <br>
+	    	邮件: <br> <input type='text' class='email' /> <br>
+	    	<button onclick='doSubmit()'> 提交 </button> 	    
+	    </div>
+	    
+    </div>
+  </body>
+  
+  <script>
+	function doSubmit()
+	{
+		// 请求参数
+		var req = {};
+		req.name =  $('.info .name').val().trim();
+		req.password = $('.info .password').val().trim();
+		req.email =   $('.info .email').val().trim();
+	
+		
+		$.ajax({
+			type:'POST',       
+			url:LW.getContextPath()+'AddUser',   	
+			data: JSON.stringify(req),    /*  JSON字符串*/
+			dataType: 'json', 
+			success: function(resp){  
+				console.log(resp);
+				if(resp.error == 0) 
+					alert('成功'+resp.data);
+				else
+					alert('出错:' + resp.reason);
+			},
+			error: function(jqXHR, textStatus, errorThrown)
+			{
+				alert("通讯错误:" + jqXHR.status);
+			}
+		});
+	}
+  </script>
+</html>
