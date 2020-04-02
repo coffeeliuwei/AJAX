@@ -20,12 +20,20 @@ public class CreatJSON {
 		JsonObject object = new JsonObject();
 		object.addProperty("name", "liuwei");
 		JsonArray array = new JsonArray();
+		/**
+		 * {name:liuwei,skills:
+		 * [{id:1,skills:e,name:java},
+		 * {id:2,skills:4,name:javawe},
+		 * {id:3,skills:2,name:javae}],
+		 * pop:true}
+		 */
 
 		JsonObject a1 = new JsonObject();
 		a1.addProperty("id", 1);
 		a1.addProperty("skills", "Eclipse");
 		a1.addProperty("name", "java");
 		array.add(a1);
+		
 
 		JsonObject a2 = new JsonObject();
 		a2.addProperty("id", 2);

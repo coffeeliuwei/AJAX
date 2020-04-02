@@ -59,6 +59,8 @@
 						<th class='c4'> 手机号 </th>
 					</thead>
 					<tbody>
+					
+						
 						
 					</tbody>
 				</table>
@@ -79,9 +81,9 @@
 				type:'GET',       /* 请求类型 GET / POST */ 
 				url:LW.getContextPath()+'studentQuery',  /* 服务URI, 用相对地址 */				
 				dataType: 'json', /* 期望服务器返回的数据类型 */
-				success: function(resp){  /* 已经将服务器返回的数据转成 JS对象 */
+				success: function(data){  /* 已经将服务器返回的数据转成 JS对象 */
 					//console.log(resp);
-					showResult(resp);
+					showResult(data);
 				}
 			});
 		}

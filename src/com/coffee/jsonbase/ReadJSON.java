@@ -1,6 +1,9 @@
 package com.coffee.jsonbase;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+
+import org.eclipse.jdt.internal.compiler.ast.ThisReference;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonIOException;
@@ -25,6 +28,7 @@ public class ReadJSON {
 	public static void main(String[] args) {
 		JsonParser parser = new JsonParser();
 		try {
+			
 			JsonObject object = (JsonObject) parser.parse(new FileReader(
 					"test.json"));
 			System.out.println("name=" + object.get("name").getAsString());

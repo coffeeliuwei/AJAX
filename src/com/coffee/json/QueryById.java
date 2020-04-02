@@ -3,6 +3,7 @@ package com.coffee.json;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -50,14 +51,14 @@ public class QueryById extends HttpServlet {
 		// 参数处理
 		int from = Integer.valueOf( strFrom );
 		int to = Integer.valueOf( strTo);
-		ArrayList<Map> students = new ArrayList<Map>();
+		List<Map> students = new ArrayList<Map>();
 		String sql="select * from student";
 		SqlWhere where=new SqlWhere();
 		where.add("id",">", from).add("id", "<", to);
 		sql=sql+where;
 		System.out.println(sql);
 		try {
-		students=	(ArrayList<Map>) DB.query(sql, 0);
+		students=	DB.query(sql, 0);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -43,8 +43,7 @@ public class pojo2json {
 		pojo.setName("liuwei");
 		pojo.setSkills(skills);
 		pojo.setPop(true);
-		Gson gson=new Gson();
-		System.out.println(gson.toJson(pojo));
+		System.out.println(new Gson().toJson(pojo));
 	}
 
 }

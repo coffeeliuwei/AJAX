@@ -45,17 +45,17 @@
 	function doSubmit()
 	{
 		// 请求参数
-		var f = $('.info');
-		var req = {};
+		var f = $('.info');//jquery
+		var req = {};//js
 		req.id = $('.id', f).val().trim();  // 在父容器f下找子控件 .id, 相当于 $('.info .id')
 		req.name = $('.name', f).val().trim();
 		req.phone = $('.phone', f).val().trim();
 		req.sex = $('.sex', f).val().trim();
-		
+		var jsonstr = JSON.stringify(req);
 		$.ajax({
 			type:'POST',       /* 请求类型 GET / POST */ 
 			url:LW.getContextPath()+'AddStudent',   /* 服务URI, 用相对地址 */		
-			data: req,        /* 附加请求参数 */
+			data: jsonstr,        /* 附加请求参数 *///?id=dxddd&name=xxxx&phone=ddidi&sex=kjkdj
 			dataType: 'json', /* 期望服务器返回的数据类型 */
 			success: function(resp){  /* 已经将服务器返回的数据转成 JS对象 */
 				console.log(resp);

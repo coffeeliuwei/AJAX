@@ -64,6 +64,9 @@ public class AddStudent extends HttpServlet {
 			         info.put("reason", e.toString());
 				}
 				// 返回应答数据
+				/**
+				 * {error:xx,reason:xxxx,data:object}
+				 */
 				response.setCharacterEncoding("UTF-8");
 				response.setContentType("text/plain");
 				Writer writer = response.getWriter();

@@ -79,16 +79,16 @@
 		{
 			// 请求参数
 			var req = {};
-			req.filter = encodeURI(encodeURI($('.toolbar .filter').val().trim()));
+			req.filter = encodeURI($('.toolbar .filter').val().trim());
 			
 			$.ajax({
 				type:'GET',       /* 请求类型 GET / POST */ 
 				url:LW.getContextPath()+'QueryByName',   /* 服务URI, 用相对地址 */		
 				data: req,        /* 附加请求参数 */
-				dataType: 'json', /* 期望服务器返回的数据类型 */
-				success: function(resp){  /* 已经将服务器返回的数据转成 JS对象 */
+				dataType: 'json', /* 期望服务器返回的数据类型 *///JSON.parser()
+				success: function(data){  /* 已经将服务器返回的数据转成 JS对象 */
 					//console.log(resp);
-					showResult(resp);
+					showResult(data);
 				}
 			});
 		}

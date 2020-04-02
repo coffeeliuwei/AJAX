@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -43,17 +44,17 @@ public class QueryByName extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String filter = request.getParameter("filter");
-       String string= new String(filter.getBytes("ISO8859-1"), "utf-8");
-        //filter= URLDecoder.decode(filter, "UTF-8");
+      // String string= new String(filter.getBytes("ISO8859-1"), "utf-8");
+        String string= URLDecoder.decode(filter, "UTF-8");
         System.out.println(string);		
-		ArrayList<Map> students = new ArrayList<Map>();
+		List<Map> students = new ArrayList<Map>();
 		String sql="select * from student";
 		SqlWhere where=new SqlWhere();
 		where.addLike("name", "%"+string+"%");
 		sql=sql+where;
 		System.out.println(sql);
 		try {
-		students=	(ArrayList<Map>) DB.query(sql, 0);
+		students=	DB.query(sql, 0);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

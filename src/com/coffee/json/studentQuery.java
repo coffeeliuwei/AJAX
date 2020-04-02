@@ -3,6 +3,7 @@ package com.coffee.json;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -44,10 +45,10 @@ public class studentQuery extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Map> students = new ArrayList<Map>();
+		List<Map> students = new ArrayList<Map>();
 		String sql="select * from student";
 		try {
-		students=	(ArrayList<Map>) DB.query(sql, 0);
+		students=	 DB.query(sql, 0);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -58,11 +59,11 @@ public class studentQuery extends HttpServlet {
 		response.setCharacterEncoding("UTF-8"); /* 设置字符集编码 */
 		response.setContentType("text/plain"); /* 设置内容格式 */
 		
-		PrintWriter out = response.getWriter();	
-	//	out.write(jarray.toJson(students));	
-	//	System.out.println( jarray.toJson(students) );
-        out.write(jarray1.toString());
-		System.out.println( jarray1.toString() );
+		//PrintWriter out = response.getWriter();	
+		response.getWriter().write(jarray.toJson(students));//json类型的字符串
+		System.out.println( jarray.toJson(students) );
+      //  out.write(jarray1.toString());
+		//System.out.println( jarray1.toString() );
 	}
 
 }
