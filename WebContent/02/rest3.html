@@ -58,6 +58,7 @@
 				else
 					alert('出错:' + resp.reason);
 			},
+			//{error:xxx,reason:xxx,data:xxxx}
 			error: function(jqXHR, textStatus, errorThrown)
 			{
 				alert("通讯错误:" + jqXHR.status);

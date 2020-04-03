@@ -70,7 +70,7 @@ LW.restErrHandler = function(error, reason)
 LW.rest = function (serviceUri, req, okHandler, errHandler)
 {
 	jQuery.ajax({				
-		url: serviceUri, 			
+		url: LW.getContextPath()+serviceUri, 			
 		method: "POST", 
 		processData: false,	
 		data: JSON.stringify(req), 

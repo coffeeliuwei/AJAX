@@ -15,7 +15,7 @@ public class FormData extends HashMap<String, String>
 	public FormData()
 	{		
 	}
-	
+	//?ddd=xxxx&aa=xx
 	// 解析query字会串
 	public static FormData parse( String query, String charset)
 	{

@@ -28,7 +28,7 @@ import java.util.Map;
 public abstract class REST extends HttpServlet
 {
 	protected boolean enableErrorLog = false; // 是否打印异常输出
-	protected boolean niceJSONFormat = true; // 输出的JSON是否综进 (缩进影响运行效率)
+	protected boolean niceJSONFormat = true; // 输出的JSON是否缩进 (缩进影响运行效率)
 	protected int MAX_REQUEST_SIZE = 1024 * 512; // 允许上传的JSON最大长度
 	protected String charset = "UTF-8";
 	
@@ -91,6 +91,7 @@ public abstract class REST extends HttpServlet
 		}
 		
 		// 是否按可读风格生成JSON ( 缩进格式 or 紧凑格式 )
+		//JSONobject put
 		//String jsonstr = niceJSONFormat ? jresp.toString(2) : jresp.toString();
 		Gson jresp;
 		if (niceJSONFormat) {

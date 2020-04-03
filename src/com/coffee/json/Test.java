@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.coffee.restful.REST;
+import com.coffee.restful.WebException;
 import com.google.gson.JsonObject;
 @WebServlet("/Test")
 public class Test extends REST {
@@ -18,7 +19,7 @@ public class Test extends REST {
 		// TODO Auto-generated method stub
 		int id = jreq.get("id").getAsInt();
 		if(id <= 0)
-			throw new Exception("ID必须为正值!");
+			throw new WebException(-200,"ID必须为正值!");
 		
 		// 处理
 		

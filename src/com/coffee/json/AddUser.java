@@ -1,5 +1,8 @@
 package com.coffee.json;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,5 +26,6 @@ public class AddUser extends REST {
 		// 可以返回 null, 或者 int, long, double, String, 或者  JSONObject / JSONArray
 		return 123;
 	}
+	
 
 }
