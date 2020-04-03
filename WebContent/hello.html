@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>hello.html</title>
+    <meta charset='utf-8'> 	
+	
+	<style>
+		.row{
+			margin: 10px 0;
+		}
+	</style>
+	
+  </head>
+  
+  <body>
+  	<div style='width:500px;margin:40px auto auto auto' >
+  	 <div class='row'> Thymeleaf解析</div>
+  		<div class='row'> 学生信息 :</div>    
+    	<div class='row' > 
+    		<label> 学号 </label>
+    		<span th:text="${stu.id}" >00000000 </span>
+    	 </div>
+    	<div class='row' > 
+    		<label> 姓名</label>
+    		<span th:text="${stu.name}"> 小张 </span>
+    	</div>
+    	<div class='row' > 
+    		<label> 性别 </label>
+    		<span th:text="${stu.sex}" > 男  </span>
+    	</div>
+    	<div class='row' > 
+    		<label> 手机号 </label>
+    		<span th:text="${stu.phone}"> 13800000000 </span>
+    	</div>
+     	
+    </div>
+    
+  </body>
+</html>

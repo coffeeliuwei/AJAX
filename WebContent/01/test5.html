@@ -51,11 +51,17 @@
 		req.name = $('.name', f).val().trim();
 		req.phone = $('.phone', f).val().trim();
 		req.sex = $('.sex', f).val().trim();
+		
+			// 必要的转换
+			req.id = Number(req.id); // id 转为 Number			
+			req.sex = ( req.sex == 'male'); // sex 转为 boolean
 		var jsonstr = JSON.stringify(req);
 		$.ajax({
 			type:'POST',       /* 请求类型 GET / POST */ 
-			url:LW.getContextPath()+'AddStudent',   /* 服务URI, 用相对地址 */		
-			data: jsonstr,        /* 附加请求参数 *///?id=dxddd&name=xxxx&phone=ddidi&sex=kjkdj
+			url:LW.getContextPath()+'AddStudent',   /* 服务URI, 用相对地址 */	
+			contentType:'application/json',//三个坑坑进行对比
+			//processData: false,	
+			data: req,        /* 附加请求参数 *///?id=dxddd&name=xxxx&phone=ddidi&sex=kjkdj
 			dataType: 'json', /* 期望服务器返回的数据类型 */
 			success: function(resp){  /* 已经将服务器返回的数据转成 JS对象 */
 				console.log(resp);
